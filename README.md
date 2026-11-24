@@ -39,7 +39,7 @@ ReadyGo is a CarRent management platform with a NestJS API and a polished fronte
 5. Open the frontend in the browser:
    http://localhost:3000
 6. API base URL:
-   http://localhost:3000/api/carrent/v1
+   http://localhost:3000/api//v1
 
 ## Backend implementation
 
