@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en-PH">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ReadyGo | Car Rental</title>
+    <meta
+      name="description"
+      content="ReadyGo helps customers in the Philippines browse rental cars and plan their trips."
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-wrap">
+          <div class="brand-mark">R</div>
+          <div>
+            <p class="brand-name">ReadyGo</p>
+            <p class="brand-subtitle">CarRent</p>
+          </div>
+        </div>
+
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="#fleet">Fleet</a>
+          <a href="#booking">Booking</a>
+          <a href="#myReservations" id="myReservationsNavLink" hidden>My reservations</a>
+          <a href="#account">Account</a>
+          <a href="#management" id="managementNavLink" hidden>Manage</a>
+          <a href="#support">Support</a>
+        </nav>
+
+        <button class="primary-button small-button" id="headerCta">Book now</button>
+        <div id="accountState" class="account-card header-account hidden">
+          <div class="account-avatar" id="accountAvatar">R</div>
+          <div>
+            <p class="account-label">Signed in as</p>
+            <strong id="accountName">ReadyGo guest</strong>
+          </div>
+          <button class="secondary-button tiny-button" id="logoutBtn">Logout</button>
+        </div>
+      </header>
+
+      <main class="page-content">
+        <section class="hero panel">
+          <div class="hero-copy">
+            <p class="eyebrow">Premium mobility, simplified</p>
+            <h1>Rent the right car for every journey.</h1>
+            <p class="hero-text">
+              Explore our fleet, plan local trips, and see clear daily rates in Philippine pesos.
+            </p>
+
+            <div class="hero-actions">
+              <button class="primary-button" id="browseFleetBtn">Browse fleet</button>
+              <button class="secondary-button" id="viewPricingBtn">View pricing</button>
+            </div>
+
+            <ul class="hero-points">
+              <li>24/7 support</li>
+              <li>Instant booking</li>
+              <li>Flexible daily pricing</li>
+            </ul>
+          </div>
+
+          <div class="hero-visual">
+            <div class="booking-mini-card">
+              <div class="mini-card-top">
+                <span class="dot dot-success"></span>
+                <span>Available today</span>
+              </div>
+
+              <div class="hero-form-card">
+                <label>
+                  Pick-up date
+                  <input type="date" id="pickupDate" required />
+                </label>
+                <label>
+                  Return date
+                  <input type="date" id="returnDate" required />
+                </label>
+                <label>
+                  Location
+                  <select id="pickupLocation">
+                    <option value="Makati City">Makati City</option>
+                    <option value="BGC, Taguig">BGC, Taguig</option>
+                    <option value="NAIA, Pasay">NAIA, Pasay</option>
+                    <option value="Cebu City">Cebu City</option>
+                    <option value="Davao City">Davao City</option>
+                  </select>
+                </label>
+              </div>
+
+              <button class="primary-button full-width" id="quickBookBtn">Quick book</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="stats-grid" aria-label="Performance stats">
+          <article class="stat-card panel">
+            <span class="stat-kicker">Fleet</span>
+            <strong id="fleetCount">0</strong>
+            <small>Vehicle lineup</small>
+          </article>
+          <article class="stat-card panel">
+            <span class="stat-kicker">Avg. rate</span>
+            <strong id="avgPrice">$0</strong>
+            <small>Per day · PHP</small>
+          </article>
+          <article class="stat-card panel">
+            <span class="stat-kicker">Availability</span>
+            <strong id="availableCount">0</strong>
+            <small>Ready now</small>
+          </article>
+          <article class="stat-card panel">
+            <span class="stat-kicker">Support</span>
+            <strong>24/7</strong>
+            <small>Concierge</small>
+          </article>
+        </section>
+
+        <section class="dashboard-grid" id="fleet">
+          <div class="panel cars-panel">
+            <div class="panel-header">
+              <div>
+                <p class="panel-kicker">Explore</p>
+                <h2>Vehicles in the Philippines</h2>
+              </div>
+              <button class="secondary-button tiny-button" id="refreshFleetBtn">Refresh</button>
+            </div>
+
+            <div id="carsGrid" class="cars-grid" aria-live="polite"></div>
+          </div>
+
+          <aside class="panel auth-panel" id="account">
+            <div class="panel-header compact-header">
+              <div>
+                <p class="panel-kicker">Account</p>
+                <h2>Member access</h2>
+              </div>
+            </div>
+
+            <div class="tabs" role="tablist" aria-label="Authentication tabs">
+              <button class="tab active" data-tab="login" role="tab" aria-selected="true">Login</button>
+              <button class="tab" data-tab="register" role="tab" aria-selected="false">Register</button>
+            </div>
+
+            <form id="loginForm" class="auth-form active" novalidate>
+              <label>
+                Email
+                <input type="email" id="loginEmail" placeholder="you@example.com" required />
+              </label>
+              <label>
+                Password
+                <input type="password" id="loginPassword" placeholder="••••••••" required />
+              </label>
+              <button type="submit" class="primary-button full-width">Log in</button>
+            </form>
+
+            <form id="registerForm" class="auth-form" novalidate>
+              <label>
+                Full name
+                <input type="text" id="registerName" placeholder="Alex Morgan" required />
+              </label>
+              <label>
+                Email
+                <input type="email" id="registerEmail" placeholder="alex@example.com" required />
+              </label>
+              <label>
+                Password
+                <input type="password" id="registerPassword" placeholder="Min 6 characters" required />
+              </label>
+              <label>
+                Phone
+                <input type="tel" id="registerPhone" placeholder="+63 9XX XXX XXXX" />
+              </label>
+              <label>
+                Address
+                <input type="text" id="registerAddress" placeholder="Street, barangay, city (optional)" />
+              </label>
+              <button type="submit" class="primary-button full-width">Create account</button>
+            </form>
+
+            <section id="adminSetup" class="admin-setup hidden">
+              <p class="panel-kicker">First-time setup</p>
+              <h3>Create the first admin</h3>
+              <p>No administrator account exists yet. Set one up to manage ReadyGo.</p>
+              <form id="adminSetupForm" class="admin-setup-form" novalidate>
+                <label>
+                  Full name
+                  <input type="text" id="adminSetupName" required minlength="2" />
+                </label>
+                <label>
+                  Email
+                  <input type="email" id="adminSetupEmail" required />
+                </label>
+                <label>
+                  Password
+                  <input type="password" id="adminSetupPassword" required minlength="6" />
+                </label>
+                <label>
+                  Phone
+                  <input type="tel" id="adminSetupPhone" placeholder="+63 9XX XXX XXXX" />
+                </label>
+                <button type="submit" class="primary-button full-width">Create admin account</button>
+              </form>
+            </section>
+
+          </aside>
+        </section>
+
+        <section class="booking-section panel" id="booking">
+          <div class="panel-header">
+            <div>
+              <p class="panel-kicker">Reservation</p>
+              <h2>Build your trip</h2>
+            </div>
+          </div>
+
+          <form id="bookingForm" class="booking-form">
+            <label>
+              Select vehicle
+              <select id="bookingCarSelect">
+                <option value="">Choose a vehicle</option>
+              </select>
+            </label>
+            <label>
+              Pick-up city
+              <select id="bookingCity">
+                <option value="Makati City">Makati City</option>
+                <option value="BGC, Taguig">BGC, Taguig</option>
+                <option value="NAIA, Pasay">NAIA, Pasay</option>
+                <option value="Cebu City">Cebu City</option>
+                <option value="Davao City">Davao City</option>
+                <option value="Clark, Pampanga">Clark, Pampanga</option>
+                <option value="Iloilo City">Iloilo City</option>
+              </select>
+            </label>
+            <label>
+              Pick-up date
+              <input type="date" id="bookingPickupDate" required />
+            </label>
+            <label>
+              Return date
+              <input type="date" id="bookingReturnDate" required />
+            </label>
+            <button type="submit" class="primary-button">Get trip estimate</button>
+          </form>
+
+          <div id="bookingSummary" class="booking-summary">
+            Pick a vehicle and dates to estimate your trip. Prices are displayed in Philippine pesos; this estimate does not submit a reservation.
+          </div>
+
+          <section id="paymentSection" class="payment-panel" hidden>
+            <div class="panel-header compact-header">
+              <div>
+                <p class="panel-kicker">Payment</p>
+                <h2>Choose a payment method</h2>
+              </div>
+            </div>
+            <p class="payment-notice">Demo only: this simulates a successful payment and does not charge you or process real money.</p>
+            <form id="paymentForm" class="payment-form">
+              <label>
+                Payment method
+                <select id="paymentMethod" required>
+                  <option value="cash">Cash</option>
+                  <option value="GCash">GCash</option>
+                  <option value="Maya">Maya</option>
+                  <option value="card">Card</option>
+                  <option value="bank transfer">Bank transfer</option>
+                </select>
+              </label>
+              <button type="submit" class="primary-button" id="simulatePaymentBtn">Confirm booking &amp; simulate payment</button>
+            </form>
+            <p id="paymentFeedback" class="payment-feedback" aria-live="polite"></p>
+          </section>
+        </section>
+
+        <section class="panel reservations-section" id="myReservations" hidden>
+          <div class="panel-header">
+            <div>
+              <p class="panel-kicker">Your account</p>
+              <h2>My reservations</h2>
+            </div>
+            <button type="button" class="secondary-button tiny-button" id="refreshReservationsBtn">Refresh</button>
+          </div>
+          <div id="myReservationsList" class="reservation-list" aria-live="polite"></div>
+        </section>
+
+        <section class="panel management-panel" id="management" hidden>
+          <div class="panel-header management-heading">
+            <div>
+              <p class="panel-kicker">Operations</p>
+              <h2>Management workspace</h2>
+              <p class="management-description">Manage customers, fleet, reservations, payments, and rental records.</p>
+            </div>
+            <button type="button" class="primary-button" id="newRecordBtn">Add record</button>
+          </div>
+
+          <div class="manager-toolbar">
+            <div class="manager-tabs" role="tablist" aria-label="Manage data">
+              <button type="button" class="manager-tab active" data-module="cars" role="tab" aria-selected="true">Cars</button>
+              <button type="button" class="manager-tab" data-module="customers" role="tab" aria-selected="false">Customers</button>
+              <button type="button" class="manager-tab" data-module="admins" role="tab" aria-selected="false">Admins</button>
+              <button type="button" class="manager-tab" data-module="reservations" role="tab" aria-selected="false">Reservations</button>
+              <button type="button" class="manager-tab" data-module="payments" role="tab" aria-selected="false">Payments</button>
+              <button type="button" class="manager-tab" data-module="rental-records" role="tab" aria-selected="false">Rental records</button>
+            </div>
+            <label class="manager-search">
+              <span class="visually-hidden">Search records</span>
+              <input type="search" id="managerSearch" placeholder="Search current list" />
+            </label>
+          </div>
+
+          <div class="manager-table-wrap">
+            <table class="manager-table">
+              <thead id="managerTableHead"></thead>
+              <tbody id="managerTableBody"></tbody>
+            </table>
+          </div>
+          <p class="manager-feedback" id="managerFeedback" aria-live="polite"></p>
+          <p class="manager-security-note">Management controls are shown for admin sessions. Protect the API with server-side authorization before deploying publicly.</p>
+        </section>
+      </main>
+
+      <footer class="site-footer" id="support">
+        <div>
+          <p class="brand-name">ReadyGo</p>
+          <p>Premium rentals for work, leisure, and every important stop in between.</p>
+        </div>
+        <div class="footer-links">
+          <a href="#fleet">Fleet</a>
+          <a href="#booking">Booking</a>
+          <a href="#account">Account</a>
+        </div>
+      </footer>
+    </div>
+
+    <div id="toast" class="toast" aria-live="polite"></div>
+
+    <dialog id="recordDialog" class="record-dialog">
+      <form id="recordForm" class="record-form">
+        <div class="panel-header">
+          <div>
+            <p class="panel-kicker">Management</p>
+            <h2 id="recordDialogTitle">Add record</h2>
+          </div>
+          <button type="button" class="dialog-close" id="closeRecordDialog" aria-label="Close">×</button>
+        </div>
+        <div id="recordFields" class="record-fields"></div>
+        <div class="dialog-actions">
+          <button type="button" class="secondary-button" id="cancelRecordBtn">Cancel</button>
+          <button type="submit" class="primary-button" id="saveRecordBtn">Save record</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

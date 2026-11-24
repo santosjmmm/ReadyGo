@@ -1,0 +1,23 @@
+# compiled output
+/dist
+/node_modules
+
+# env
+.env
+.env.*
+!.env.example
+
+# logs
+*.log
+*.tsbuildinfo
+
+# OS
+.DS_Store
+Thumbs.db
+.postman/
+
+# SQLite runtime
+readygo.sqlite
+
+# Uploaded car images
+/storage/
