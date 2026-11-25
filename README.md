@@ -28,19 +28,6 @@ ReadyGo is a CarRent management platform with a NestJS API and a polished fronte
 - Admin management workspace with create, search, edit, and delete screens for all six data modules
 - Car photo uploads (JPG, PNG, or WebP; maximum 5 MB) with image previews
 
-## Getting started
-1. Install dependencies:
-   npm install
-2. Copy the environment file:
-   copy .env.example .env
-3. Set `JWT_SECRET` in `.env` to a long, random value before starting the app.
-4. Start the app in development mode:
-   npm run start:dev
-5. Open the frontend in the browser:
-   http://localhost:3000
-6. API base URL:
-   http://localhost:3000/api//v1
-
 ## Backend implementation
 
 See [Backend Implementation](docs/backend-implementation.md) for the actual project structure, modules, controller and service examples, TypeORM entities, database configuration, authentication flow, request lifecycle, and screenshots of the running backend.
